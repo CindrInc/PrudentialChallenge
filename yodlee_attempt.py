@@ -87,11 +87,13 @@ def getTransactionsCount(account):
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count", headers=INFO['headers'], params=data)
     return req.json()
 
-getCobrandToken()
-getUserToken(INFO['users'][0])
-# printTransactionCategories()
-accounts = getAccounts()
-# for account in accounts:
-#     print(json.dumps(getTransactions(account), indent=4))
-print(json.dumps(getTransactions(accounts[0]), indent=4))
-print(json.dumps(getTransactionsCount(accounts[0]), indent=4))
+
+if __name__ == '__main__':
+    getCobrandToken()
+    getUserToken(INFO['users'][0])
+    # printTransactionCategories()
+    accounts = getAccounts()
+    # for account in accounts:
+    #     print(json.dumps(getTransactions(account), indent=4))
+    print(json.dumps(getTransactions(accounts[0]), indent=4))
+    print(json.dumps(getTransactionsCount(accounts[0]), indent=4)) 
