@@ -2,7 +2,21 @@
 import requests
 import json
 #[ base url: https://developer.api.yodlee.com/ysl , api version: 1.1 ]
+'''
+User Name:
+sbMemdcddf2bf509e1bd18aba3e09326e978d8a1
 
+User Password:
+sbMemdcddf2bf509e1bd18aba3e09326e978d8a1#123
+-----------------------------------------
+User Name:
+sbMemdcddf2bf509e1bd18aba3e09326e978d8a2
+
+User Password:
+sbMemdcddf2bf509e1bd18aba3e09326e978d8a2#123
+----
+
+'''
 INFO = {
     'CO_BRAND_LOGIN': 'sbCobdcddf2bf509e1bd18aba3e09326e978d8a',
     'CO_BRAND_PASSWORD': "f12a5508-147e-4913-82e8-2c535d9874c0",
@@ -31,7 +45,34 @@ INFO = {
             'loginName': 'sbMemd3aa8452551164e8de97c47f19115e4b0a5',
             'password': 'sbMemd3aa8452551164e8de97c47f19115e4b0a5#123',
             'locale': 'en_US'
+        },
+        #--------------------------------------------------------------
+        {
+            'loginName': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a1',
+            'password': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a1#123',
+            'locale': 'en_US'
+        },
+        {
+            'loginName': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a2',
+            'password': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a2#123',
+            'locale': 'en_US'
+        },
+        {
+            'loginName': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a3',
+            'password': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a3#123',
+            'locale': 'en_US'
+        },
+        {
+            'loginName': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a4',
+            'password': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a4#123',
+            'locale': 'en_US'
+        },
+        {
+            'loginName': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a5',
+            'password': 'sbMemdcddf2bf509e1bd18aba3e09326e978d8a5#123',
+            'locale': 'en_US'
         }
+
     ],
     'session': {},
     'headers': {'Api-Version': '1.1', 'Cobrand-Name': 'restserver', 'Content-Type': 'application/json'}
