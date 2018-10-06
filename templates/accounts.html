@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        List Accounts
+    </title>
+</head>
+<body>
+    <ul>
+        {% for account in accounts %}
+        <li><a href="/transactions/{{ account.id|e }}">{{ account.accountName|e }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

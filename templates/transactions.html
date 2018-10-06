@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Transactions
+    </title>
+</head>
+<body>
+    {% if tran is defined %}
+        {% if tran is iterable %}
+            <ul>
+                {% for tra in tran %}
+                <li>
+                    <a href="/transactions/{{ account|e }}/{{ tra.id|e }}">Amount: {{ tra.amount.amount|e }} {{ tra.amount.currency|e }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            Amount: {{ tran.amount.amount|e }} {{ tran.amount.currency|e }}
+        {% endif %}
+    {% else %}
+        oops lmfao
+    {% endif %}
+    </ul>
+</body>
+</html>

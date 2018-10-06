@@ -72,7 +72,7 @@ def printTransactionCategories():
 def getTransactions(account):
     data = {
         # "container": "creditCard",
-        # "accountId": account['id'],
+        "accountId": account,
         "fromDate": "2000-01-01",
         "toDate": "2020-01-01"
     }
@@ -87,6 +87,9 @@ def getTransactionsCount(account):
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count", headers=INFO['headers'], params=data)
     return req.json()
 
+def init():
+    getCobrandToken()
+    getUserToken(INFO['users'][0])
 
 if __name__ == '__main__':
     getCobrandToken()
@@ -95,5 +98,6 @@ if __name__ == '__main__':
     accounts = getAccounts()
     # for account in accounts:
     #     print(json.dumps(getTransactions(account), indent=4))
-    print(json.dumps(getTransactions(accounts[0]), indent=4))
-    print(json.dumps(getTransactionsCount(accounts[0]), indent=4)) 
+    print(json.dumps(getTransactions(accounts[0]['id']), indent=4))
+    # print(accounts[0])
+    # print(json.dumps(getTransactionsCount(accounts[0]), indent=4))
