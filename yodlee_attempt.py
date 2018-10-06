@@ -51,15 +51,15 @@ def getCobrandToken():
     res = req.json()
     INFO['session']["cobSession"] = res["session"]["cobSession"]
 
-def getUserToken():
+def getUserToken(userIndex):
     data = {
-        "user": INFO['users'][0]
+        "user": INFO['users'][userIndex]
     }
 
     INFO['headers'].update({
         'Authorization': '{cobSession=%s}' % INFO['session']['cobSession']
     })
-    print(INFO['headers'])
+    print('headers:', INFO['headers'])
 
     data_json = json.dumps(data)
     req = requests.post("https://developer.api.yodlee.com/ysl/user/login", headers=INFO['headers'], data=data_json)
@@ -67,5 +67,5 @@ def getUserToken():
     print(res)
 
 getCobrandToken()
-getUserToken()
 print(INFO['session']["cobSession"])
+getUserToken(6)
