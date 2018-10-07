@@ -310,11 +310,17 @@ for user in INFO['users']:
                 except:
                     pass #this is because some of the categories there are no incomes so the json is empty
         print("User: " + str(user_index) + " Account" + str(j) + " Sum of incomes: " + str(sum_of_incomes))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for credit card: ",getTransactionsCount(account,'1900','2020','01','12','01','28','creditCard'))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for bank: ",getTransactionsCount(account,'1900','2020','01','12','01','28','bank'))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for investment: ",getTransactionsCount(account,'1900','2020','01','12','01','28','investment'))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for insurance: ",getTransactionsCount(account,'1900','2020','01','12','01','28','insurance'))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for loan: ",getTransactionsCount(account,'1900','2020','01','12','01','28','loan'))
+        credit_card = getTransactionsCount(account,'1900','2020','01','12','01','28','creditCard')
+        bank = getTransactionsCount(account,'1900','2020','01','12','01','28','bank')
+        investment = getTransactionsCount(account,'1900','2020','01','12','01','28','investment')
+        insurance = getTransactionsCount(account,'1900','2020','01','12','01','28','insurance')
+        loan = getTransactionsCount(account,'1900','2020','01','12','01','28','loan')
+        #print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions: ", credit_card['transaction']['TOTAL']['count'])
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for credit card: ", credit_card['transaction']['TOTAL']['count'])
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for bank: ",bank['transaction']['TOTAL']['count'])
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for investment: ", investment['transaction']['TOTAL']['count'])
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for insurance: ",insurance['transaction']['TOTAL']['count'])
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for loan: ",loan['transaction']['TOTAL']['count'])
         j += 1 #this is just to keep track of accounts'''
         user_index += 1
 

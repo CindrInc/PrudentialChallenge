@@ -207,6 +207,8 @@ for user in INFO['users']:
     for account in accounts:
         print(" Now calculating your expenses")
         sum_of_expenses = 0
+        lol = getTransactionsCount(account,'1900','2020','01','12','01','28')
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions: ", lol['transaction']['TOTAL']['count'])
         for i in EXPENSES_CATEGORY_ID:
             try:
                 #print("id: " + str(i))
@@ -309,7 +311,7 @@ for user in INFO['users']:
                 except:
                     pass #this is because some of the categories there are no incomes so the json is empty
         print("User: " + str(user_index) + " Account" + str(j) + " Sum of incomes: " + str(sum_of_incomes))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions: ",getTransactionsCount(account,'1900','2020','01','12','01','28'))
+
         j += 1 #this is just to keep track of accounts'''
         user_index += 1
 
