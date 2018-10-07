@@ -170,6 +170,7 @@ def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,
 
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count",headers= INFO['headers'],params = data)
     return req.json()
+
 def getTransactionsSummary(account,from_year,to_year,from_month,to_month,from_day,to_day,category_id,category_type):
     data = {
         'accountId': account['id'],

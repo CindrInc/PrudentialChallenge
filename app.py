@@ -6,6 +6,17 @@ app = Flask("Prudential Challenge")
 yodlee_attempt.init(yodlee_attempt.INFO['users'][0])
 
 # def checkError()
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 @app.route("/")
 def index():
@@ -33,7 +44,6 @@ def home():
 
 @app.route("/transactions/<accountId>/<id>")
 def transactionDetails(accountId, id):
-    print(accountId, id)
     transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
     tran = None
     for t in transactions:
@@ -42,8 +52,8 @@ def transactionDetails(accountId, id):
             break
     return render_template('transaction_details.html', account=accountId, tran=tran)
 
-@app.route("/transactions/<accountId>")
-def transactions(accountId):
+@app.route("/viewAccount/<accountId>")
+def viewAccount(accountId):
+    account = yodlee_attempt.getAccount(accountId)
     transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
-    return render_template('transactions.html', account=accountId, tran=transactions)
-
+    return render_template('viewAccount.html', account=account, tran=transactions)
