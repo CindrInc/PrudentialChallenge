@@ -173,7 +173,8 @@ accounts = getAccounts()
 for account in accounts:
     #account,from_year,to_year,from_month,to_month,from_day,to_day)
     print("Number of transactions: ",getTransactionsCount(account,'1900','2020','01','12','01','28'))
-    print("Transactions: ",getTransactions(account,'1900','2020','01','12','01','28'))
+    #print("Transactions: ",getTransactions(account,'1900','2020','01','12','01','28'))
+    break
 '''for i in range(len(INFO['users'])):
     getUserToken(INFO['users'][i])
     accounts = getAccounts()

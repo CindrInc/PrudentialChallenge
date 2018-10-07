@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<style>
+div {
+    background-color: black;
+    width: 50%;
+    border: 10px solid orange;
+    padding: 25px;
+    margin: 25px;
+}
+.within_box{
+    color:orange;
+}
+body{
+  background-color: black;
+}
+p{
+  color:orange;
+}
+h1{
+  color:orange;
+}
+</style>
+
+<head>
+<title>
+    List Accounts
+</title>
+
+<h1>Accounts</h1>
+</head>
+<body>
+
+
+
+<p>Here are your accounts below</p>
+
+<div class = "within_box">This text is the actual content of the box. <ul>
+    {% for account in accounts %}
+    <li><a href="/transactions/{{ account.id }}">{{ account.accountName }}</a></li>
+    {% endfor %}
+</ul></div>
+
+<!-- so the below code was supposed to be navbar but i realized it made another bordered box...
+<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Logo</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
+-->
+</body>
+
+<link rel="stylesheet" type="text/css" href="mystyle_home.css">
+
+
+
+
+</html>
