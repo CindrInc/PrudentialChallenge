@@ -5,23 +5,66 @@
     <title>
         Transactions
     </title>
-    <!-- <link rel="stylesheet" type="text/css" href="mystyle_login.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle_login.css">
+    <style>
+
+        input[type=text], select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            
+            input[type=submit] {
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+            
+            div {
+                border-radius: 5px;
+                background-color: black;
+                padding: 20px;
+            }
+    </style>
 </head>
 
 <body>
-    <!-- <img class="img-fire" src="img/fire.jpg" alt="Cindr"> -->
+    <img class="img-fire" src="img/fire.jpg" alt="Cindr">
     <h1>Login</h1>
-    <div>
-        <form action="/login" method="POST">
-            <!-- <label class='username'>username</label> -->
-            <input type="text" name="username" placeholder="Username" value="sbMemdcddf2bf509e1bd18aba3e09326e978d8a1">
+    <div class="container">
 
-            <!-- <label class='password'>password</label> -->
-            <input type="text" name="password" placeholder="Password" value="sbMemdcddf2bf509e1bd18aba3e09326e978d8a1#123">
-            <button type="submit" class="submit">Submit</button>
-        </form>
+
+        <div>
+            <form action="/login" method="POST">
+                <label for="fname" class='username'>username</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your username..">
+
+                <label for="lname" class='password'>password</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your password..">
+
+
+
+                <!--<input type="submit" value="Submit"> -->
+                <button type="submit" class="submit">Submit</button>
+            </form>
+        </div>
+
     </div>
-
 
 
 
