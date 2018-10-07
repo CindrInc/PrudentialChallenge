@@ -12,7 +12,7 @@ h1 {
     margin: 8px;
 }
 .img-fire{
-    width:200px;
+    width:100px;
 
 }
 .username{
@@ -24,7 +24,15 @@ h1 {
 .submit{
   color:orange;
 }
-
+.support{
+  color:orange;
+}
+.home{
+  color:orange;
+}
+.about{
+  color:orange;
+}
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
