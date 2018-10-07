@@ -133,7 +133,7 @@ def getTransactions(account,from_year,to_year,from_month,to_month,from_day,to_da
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions", headers=INFO['headers'], params=data)
     return req.json()
-def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,to_day):
+def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,to_day,container_input):
     #info = info_for_transactions()
     '''
     print("container: " + info[6])
@@ -161,7 +161,7 @@ def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,
     }
     '''
     data = {
-        "container": "creditCard",
+        "container": container_input,
         "accountId": account['id'],
         "fromDate": from_year + "-" + from_month + "-" + from_day,
         "toDate": to_year + "-" + to_month + "-" + to_day
@@ -309,7 +309,11 @@ for user in INFO['users']:
                 except:
                     pass #this is because some of the categories there are no incomes so the json is empty
         print("User: " + str(user_index) + " Account" + str(j) + " Sum of incomes: " + str(sum_of_incomes))
-        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions: ",getTransactionsCount(account,'1900','2020','01','12','01','28'))
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for credit card: ",getTransactionsCount(account,'1900','2020','01','12','01','28','creditCard'))
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for bank: ",getTransactionsCount(account,'1900','2020','01','12','01','28','bank'))
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for investment: ",getTransactionsCount(account,'1900','2020','01','12','01','28','investment'))
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for insurance: ",getTransactionsCount(account,'1900','2020','01','12','01','28','insurance'))
+        print("User: " + str(user_index) + " Account " + str(j)+" Number of transactions for loan: ",getTransactionsCount(account,'1900','2020','01','12','01','28','loan'))
         j += 1 #this is just to keep track of accounts'''
         user_index += 1
 
