@@ -1,0 +1,25 @@
+body {
+    background-color: black;
+}
+
+head {
+    color: navy;
+    margin-left: 20px;
+}
+h1 {
+    color: orange;
+
+}
+.img-fire{
+    width:200px;
+
+}
+.username{
+  color:orange;
+}
+.password{
+  color:orange;
+}
+.submit{
+  color:orange;
+}
