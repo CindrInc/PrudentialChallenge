@@ -72,7 +72,7 @@ def printTransactionCategories():
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/categories", headers=INFO['headers'])
     print(json.dumps(req.json(), indent=4))
 
-def getTransactions(account,from_year,to_year,from_month,to_month,from_day,to_day):
+def getTransactions(accountId,from_year,to_year,from_month,to_month,from_day,to_day):
     #all_info = (from_year,to_year,from_month,to_month,from_day,to_day,containerX)
     '''
     info = info_for_transactions()
@@ -99,15 +99,15 @@ def getTransactions(account,from_year,to_year,from_month,to_month,from_day,to_da
     }
     '''
     data = {
-        "container": "creditCard",
-        "accountId": account['id'],
-        "fromDate": from_year + "-" + from_month + "-" + from_day,
-        "toDate": to_year + "-" + to_month + "-" + to_day
+        # "container": "creditCard",
+        "accountId": accountId,
+        "fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
+        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day)
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions", headers=INFO['headers'], params=data)
     return req.json()
 
-def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,to_day):
+def getTransactionsCount(accountId,from_year,to_year,from_month,to_month,from_day,to_day):
     #info = info_for_transactions()
     '''
     print("container: " + info[6])
@@ -135,14 +135,16 @@ def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,
     }
     '''
     data = {
-        "container": "creditCard",
-        "accountId": account['id'],
-        "fromDate": from_year + "-" + from_month + "-" + from_day,
-        "toDate": to_year + "-" + to_month + "-" + to_day
+        # "container": "creditCard",
+        "accountId": accountId,
+        "fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
+        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day)
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count", headers=INFO['headers'], params=data)
     return req.json()
 
+def getAllTransactions(accountId):
+    return getTransactions(accountId, 1900, 2030, 1, 1, 1, 1)
 
 def init(user):
     return getUserToken(user)
