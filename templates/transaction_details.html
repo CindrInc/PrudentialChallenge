@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Transaction #{{ tran.id }}
+    </title>
+</head>
+<body>
+    <p>Amount: {{ "%.02f" % tran.amount.amount }} {{ tran.amount.currency }}</p>
+    <p>Date: {{ tran.date }}</p>
+    <p>Description: {{ tran.description.original }}</p>
+    <p>Category: {{ tran.category }}</p>
+    <p>Type: {{ tran.categoryType }}</p>
+</body>
+</html>

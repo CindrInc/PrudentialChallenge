@@ -56,10 +56,13 @@ def getUserToken(user):
     }
     req = requests.post("https://developer.api.yodlee.com/ysl/user/login", headers=INFO['headers'], data=json.dumps(data))
     res = req.json()
+    if (req.text.find('err') != -1):
+        return False
     INFO['session']["userSession"] = res['user']["session"]["userSession"]
     INFO['headers'].update({
         'Authorization': '{cobSession=%s,userSession=%s}' % (INFO['session']['cobSession'], INFO['session']['userSession'])
     })
+    return True
 
 def getAccounts():
     req = requests.get("https://developer.api.yodlee.com/ysl/accounts", headers=INFO['headers'])
@@ -87,10 +90,12 @@ def getTransactionsCount(account):
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count", headers=INFO['headers'], params=data)
     return req.json()
 
-def init():
-    getCobrandToken()
-    getUserToken(INFO['users'][0])
 
+def init(user):
+    return getUserToken(user)
+
+
+getCobrandToken()
 if __name__ == '__main__':
     getCobrandToken()
     getUserToken(INFO['users'][0])

@@ -1,30 +1,48 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import yodlee_attempt
-
-yodlee_attempt.init()
 
 app = Flask("Prudential Challenge")
 
-@app.route("/")
-def home():
-    return render_template('home.html')
+yodlee_attempt.init(yodlee_attempt.INFO['users'][0])
 
-@app.route("/accounts")
-def accounts():
+@app.route("/")
+def index():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        result = yodlee_attempt.init({
+            "loginName": request.form['username'],
+            "password": request.form['password'],
+            "locale": 'en_US'
+        })
+        if result:
+            return redirect(url_for('home'))
+        else:
+            return redirect(url_for('login'))
+    else:
+        return render_template('login.html')
+
+@app.route("/home")
+def home():
     accounts = yodlee_attempt.getAccounts()
-    return render_template('accounts.html', accounts=accounts)
+    return render_template('home.html', accounts=accounts)
+
+@app.route("/transactions/<accountId>/<id>")
+def transactionDetails(accountId, id):
+    print(accountId, id)
+    transactions = yodlee_attempt.getTransactions(accountId)['transaction']
+    tran = None
+    for t in transactions:
+        if str(t['id']) == str(id):
+            tran = t
+            break
+    print(tran)
+    return render_template('transaction_details.html', account=accountId, tran=tran)
 
 @app.route("/transactions/<accountId>")
-@app.route("/transactions/<accountId>/<id>")
-def transactions(accountId, id=None):
+def transactions(accountId):
     transactions = yodlee_attempt.getTransactions(accountId)['transaction']
-    if id is None:
-        # print(transactions)
-        return render_template('transactions.html', account=accountId, tran=transactions)
-    else:
-        result = None
-        for tran in transactions:
-            if str(tran['id']) == id:
-                result = tran
-                print(result)
-        return render_template('transactions.html', account=accountId, tran=result)
+    return render_template('transactions.html', account=accountId, tran=transactions)
+
