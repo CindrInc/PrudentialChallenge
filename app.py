@@ -5,6 +5,8 @@ app = Flask("Prudential Challenge")
 
 yodlee_attempt.init(yodlee_attempt.INFO['users'][0])
 
+# def checkError()
+
 @app.route("/")
 def index():
     return redirect(url_for('login'))
@@ -32,17 +34,16 @@ def home():
 @app.route("/transactions/<accountId>/<id>")
 def transactionDetails(accountId, id):
     print(accountId, id)
-    transactions = yodlee_attempt.getTransactions(accountId)['transaction']
+    transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
     tran = None
     for t in transactions:
         if str(t['id']) == str(id):
             tran = t
             break
-    print(tran)
     return render_template('transaction_details.html', account=accountId, tran=tran)
 
 @app.route("/transactions/<accountId>")
 def transactions(accountId):
-    transactions = yodlee_attempt.getTransactions(accountId)['transaction']
+    transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
     return render_template('transactions.html', account=accountId, tran=transactions)
 
