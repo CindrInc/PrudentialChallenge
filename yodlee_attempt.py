@@ -72,20 +72,73 @@ def printTransactionCategories():
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/categories", headers=INFO['headers'])
     print(json.dumps(req.json(), indent=4))
 
-def getTransactions(account):
+def getTransactions(account,from_year,to_year,from_month,to_month,from_day,to_day):
+    #all_info = (from_year,to_year,from_month,to_month,from_day,to_day,containerX)
+    '''
+    info = info_for_transactions()
+    print("container: " + info[6])
+    print("from_year: " + info[0])
+    print("to_year: " + info[1])
+    print("from_month: " + info[2])
+    print("to_month: " + info[3])
+    print("from_day: " + info[4])
+    print("to_day: " + info[5])
     data = {
-        # "container": "creditCard",
-        "accountId": account,
-        "fromDate": "2000-01-01",
-        "toDate": "2020-01-01"
+        "container": info[6],
+        "accountId": account['id'],
+        "fromDate": info[0] + "-" + info[2] + "-" + info[4],
+        "toDate": info[1] + "-" + info[3] + "-" + info[5]
+    }
+    '''
+    '''
+    data = {
+        "container": "creditCard",
+        "accountId": account['id'],
+        "fromDate": "1900-01-01",
+        "toDate": "2030-01-01"
+    }
+    '''
+    data = {
+        "container": "creditCard",
+        "accountId": account['id'],
+        "fromDate": from_year + "-" + from_month + "-" + from_day,
+        "toDate": to_year + "-" + to_month + "-" + to_day
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions", headers=INFO['headers'], params=data)
     return req.json()
 
-def getTransactionsCount(account):
+def getTransactionsCount(account,from_year,to_year,from_month,to_month,from_day,to_day):
+    #info = info_for_transactions()
+    '''
+    print("container: " + info[6])
+    print("from_year: " + info[0])
+    print("to_year: " + info[1])
+    print("from_month: " + info[2])
+    print("to_month: " + info[3])
+    print("from_day: " + info[4])
+    print("to_day: " + info[5])
+    print("fromDate: " + info[0] + "-" + info[2] + "-" + info[4])
+    print("toDate: " + info[1] + "-" + info[3] + "-" + info[5])
     data = {
-        "fromDate": "2000-01-01",
-        "toDate": "2020-01-01"
+        "container": info[6],
+        "accountId": account['id'],
+        "fromDate": info[0] + "-" + info[2] + "-" + info[4],
+        "toDate": info[1] + "-" + info[3] + "-" + info[5]
+    }
+    '''
+    '''
+    data = {
+        "container": "creditCard",
+        "accountId": account['id'],
+        "fromDate": "1900-01-01",
+        "toDate": "2030-01-01"
+    }
+    '''
+    data = {
+        "container": "creditCard",
+        "accountId": account['id'],
+        "fromDate": from_year + "-" + from_month + "-" + from_day,
+        "toDate": to_year + "-" + to_month + "-" + to_day
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count", headers=INFO['headers'], params=data)
     return req.json()
