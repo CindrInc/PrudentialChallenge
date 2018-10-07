@@ -1,3 +1,4 @@
+#i just made a new yodlee file that i could push just in case u stuff on the other one u wanted to keep
 import requests
 import json
 INFO = {
