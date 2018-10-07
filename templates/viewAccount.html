@@ -24,8 +24,9 @@
         <h5>Transaction History</h2>
         <ul>
             {% for tra in tran %}
+            {{ tra }}
             <li>
-                <a href="/transactions/{{ account.id }}/{{ tra.id }}">{{ tra.categoryType }}: {{ "%.02f" % tra.amount.amount }} {{ tra.amount.currency }}</a>
+                <a href="/transactions/{{ account.id }}/{{ tra.id }}">{{ tra.date }}: {{ tra.categoryType }} of {{ "%.02f" % tra.amount.amount }} {{ tra.amount.currency }}</a>
             </li>
             {% endfor %}
         </ul>
