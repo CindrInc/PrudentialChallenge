@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <head>
-    <title>
-        Transaction #{{ tran.id }}
-    </title>
+  <title>
+    View Account Info
+  </title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mystyle_home.css') }}">
 </head>
 <body>
-    <p>Amount: {{ "%.02f" % tran.amount.amount }} {{ tran.amount.currency }}</p>
-    <p>Date: {{ tran.date }}</p>
-    <p>Description: {{ tran.description.original }}</p>
-    <p>Category: {{ tran.category }}</p>
-    <p>Type: {{ tran.categoryType }}</p>
+    <nav>
+      <div class="nav-wrapper black">
+        <a href="#" class="brand-logo"><img class="img-fire" src="/static/img/fire-clipart-transparent-background-3.png" alt="Cindr"></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="/home">Home</a></li>
+        </ul>
+      </span>
+      </div>
+    </nav>
+    <div class="container">
+        <h2>Transaction #{{ tran.id }}</h2>
+        <p>Amount: {{ "%.02f" % tran.amount.amount }} {{ tran.amount.currency }}</p>
+        <p>Date: {{ tran.date }}</p>
+        <p>Description: {{ tran.description.original }}</p>
+        <p>Category: {{ tran.category }}</p>
+        <p>Type: {{ tran.categoryType }}</p>
+    </div>
 </body>
 </html>

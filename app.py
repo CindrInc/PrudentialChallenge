@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import yodlee_attempt
+import yodlee_attempt1 as yodlee_attempt
 
 app = Flask("Prudential Challenge")
 
@@ -44,7 +44,7 @@ def home():
 
 @app.route("/transactions/<accountId>/<id>")
 def transactionDetails(accountId, id):
-    transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
+    transactions = yodlee_attempt.getTransactions(accountId)['transaction']
     tran = None
     for t in transactions:
         if str(t['id']) == str(id):
@@ -54,6 +54,14 @@ def transactionDetails(accountId, id):
 
 @app.route("/viewAccount/<accountId>")
 def viewAccount(accountId):
+    args = request.args
     account = yodlee_attempt.getAccount(accountId)
-    transactions = yodlee_attempt.getAllTransactions(accountId)['transaction']
-    return render_template('viewAccount.html', account=account, tran=transactions)
+    transactions = yodlee_attempt.getTransactions(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
+    if 'transaction' in transactions:
+        transactions = transactions['transaction']
+    totalExpense = yodlee_attempt.getTotalExpenses(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
+    totalIncome = yodlee_attempt.getTotalIncome(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
+    expenseCategoryBreakdown = yodlee_attempt.getExpensesByCategory(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
+    incomeCategoryBreakdown = yodlee_attempt.getIncomeByCategory(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
+    print(transactions, totalExpense, totalIncome, expenseCategoryBreakdown, incomeCategoryBreakdown)
+    return render_template('viewAccount.html', account=account, tran=transactions if len(transactions) is not 0 else 0, totalExpense=totalExpense, totalIncome=totalIncome, expenseCategoryBreakdown=expenseCategoryBreakdown, incomeCategoryBreakdown=incomeCategoryBreakdown)

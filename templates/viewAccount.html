@@ -2,34 +2,110 @@
 <html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <head>
   <title>
     View Account Info
   </title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mystyle_home.css') }}">
 </head>
+
 <body>
-    <nav>
-      <div class="nav-wrapper black">
-        <a href="#" class="brand-logo"><img class="img-fire" src="/static/img/fire-clipart-transparent-background-3.png" alt="Cindr"></a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="/home">Home</a></li>
-        </ul>
+  <nav>
+    <div class="nav-wrapper black">
+      <a href="#" class="brand-logo"><img class="img-fire" src="/static/img/fire-clipart-transparent-background-3.png"
+          alt="Cindr"></a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/home">Home</a></li>
+      </ul>
       </span>
-      </div>
-    </nav>
-    <div class="container">
-        <h3>{{ account.accountName }}</h3>
-        <h5>Current Balance: {{ account.balance.amount }} {{ account.balance.currency }}</h5>
-        <h5>Transaction History</h2>
-        <ul>
-            {% for tra in tran %}
-            {{ tra }}
-            <li>
-                <a href="/transactions/{{ account.id }}/{{ tra.id }}">{{ tra.date }}: {{ tra.categoryType }} of {{ "%.02f" % tra.amount.amount }} {{ tra.amount.currency }}</a>
-            </li>
-            {% endfor %}
-        </ul>
     </div>
+  </nav>
+  <div class="container">
+    <h3>{{ account.accountName }}</h3>
+    <h5>Current Balance: {{ account.balance.amount }} {{ account.balance.currency }}</h5>
+    <h5>Total Expenses: {{ totalExpense }}</h5>
+    <h5>Total Income: {{ totalIncome }}</h5>
+    <hr>
+    <h5>Expenses By Category</h5>
+    {% for c in expenseCategoryBreakdown %}
+    <h6>{{ c }}</h6>
+    {% endfor %}
+    <hr>
+    {% if incomeCategoryBreakdown|length > 0 %}
+      <h5>Income By Category</h5>
+      {% for c in incomeCategoryBreakdown %}
+      <h6>{{ c }}</h6>
+      {% endfor %}
+      <hr>
+    {% endif %}
+    <h5>Refine Search</h5>
+    <form class="col s12" action="/viewAccount/{{ account.id }}" method="GET">
+      <div class="row">
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="from_year" type="number" class="validate">
+          <label for="first_name">From Year</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="from_month" type="number" class="validate">
+          <label for="first_name">From Month</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="from_day" type="number" class="validate">
+          <label for="first_name">From Day</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="to_year" type="number" class="validate">
+          <label for="first_name">To Year</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="to_month" type="number" class="validate">
+          <label for="first_name">To Year</label>
+        </div>
+        <div class="input-field col s4">
+          <input placeholder="Placeholder" id="first_name" name="to_day" type="number" class="validate">
+          <label for="first_name">To Year</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Select</label>
+        </div>
+        <!-- <div class="input-field col s4">
+          <select name="container">
+            <option value="bank">Bank</option>
+            <option value="creditCard">Credit Card</option>
+            <option value="investment">Investment</option>
+            <option value="insurance">Insurance</option>
+            <option value="loan">Loan</option>
+          </select>
+          <label>Container</label>
+        </div> -->
+        <!-- <div class="col s8">
+          <button type="submit" value="Submit">
+        </div> -->
+      </div>
+    </form>
+    {% if tran is iterable %}
+    <h5>Transaction History</h2>
+    <ul>
+      {% for tra in tran %}
+      <li>
+        <a href="/transactions/{{ account.id }}/{{ tra.id }}">{{ tra.date }}: {{ tra.categoryType }} of {{ "%.02f" %
+          tra.amount.amount }} {{ tra.amount.currency }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
 </body>
+
 </html>

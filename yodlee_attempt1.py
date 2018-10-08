@@ -35,6 +35,10 @@ INFO = {
     'headers': {'Api-Version': '1.1', 'Cobrand-Name': 'restserver', 'Content-Type': 'application/json'}
 }
 
+EXPENSES_CATEGORY_ID = [3,9,2,11,14,45,16,104,37,19,33,24,13,43,10,42,18,21,17,39,15,20,25,6,108,22,7,23]
+INCOME_CATEGORY_ID = [92,29,30,96,32,225,27,114,227]
+TRANSFERS = [28,36,40,26]
+
 def getCobrandToken():
     data = {
         "cobrand":{
@@ -72,37 +76,12 @@ def printTransactionCategories():
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/categories", headers=INFO['headers'])
     print(json.dumps(req.json(), indent=4))
 
-def getTransactions(accountId,from_year=1900,to_year=2020,from_month=1,to_month=1,from_day=1,to_day=1):
-    #all_info = (from_year,to_year,from_month,to_month,from_day,to_day,containerX)
-    '''
-    info = info_for_transactions()
-    print("container: " + info[6])
-    print("from_year: " + info[0])
-    print("to_year: " + info[1])
-    print("from_month: " + info[2])
-    print("to_month: " + info[3])
-    print("from_day: " + info[4])
-    print("to_day: " + info[5])
+def getTransactions(accountId,from_year='1900',from_month='01',from_day='01',to_year='2020',to_month='01',to_day='01',container='bank'):
     data = {
-        "container": info[6],
-        "accountId": account['id'],
-        "fromDate": info[0] + "-" + info[2] + "-" + info[4],
-        "toDate": info[1] + "-" + info[3] + "-" + info[5]
-    }
-    '''
-    '''
-    data = {
-        "container": "creditCard",
-        "accountId": account['id'],
-        "fromDate": "1900-01-01",
-        "toDate": "2030-01-01"
-    }
-    '''
-    data = {
-        # "container": container,
+        "container": container,
         "accountId": accountId,
-        "fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
-        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day)
+        "fromDate": from_year +"-"+ from_month +"-"+ from_day,
+        "toDate": to_year +"-"+ to_month +"-"+ to_day
     }
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions", headers=INFO['headers'], params=data)
     return req.json()
@@ -114,22 +93,13 @@ def getAccount(accountId):
             return acc
     return None
 
-# from_year=1900, from_month=1, from_day=1, to_year=2020, to_month=1, to_day=1, container='bank')
-def getAllTransactions(accountId):
-    return getTransactions(accountId)
-
-
-EXPENSES_CATEGORY_ID = [3,9,2,11,14,45,16,104,37,19,33,24,13,43,10,42,18,21,17,39,15,20,25,6,108,22,7,23]
-INCOME_CATEGORY_ID = [92,29,30,96,32,225,27,114,227]
-TRANSFERS = [28,36,40,26]
-
 def getTotalExpenses(accountId, from_year=1900, from_month=1, from_day=1, to_year=2020, to_month=1, to_day=1):
     data = {
         'accountId': accountId,
     	'categoryId': ','.join([str(x) for x in EXPENSES_CATEGORY_ID]),
     	'groupBy':'CATEGORY',
-    	"fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
-        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day),
+    	"fromDate": "%s-%s-%s" % (from_year, from_month, from_day),
+        "toDate": "%s-%s-%s" % (to_year, to_month, to_day),
     	'categoryType': 'EXPENSE',
     	'interval': 'M',
     	'include': 'details'
@@ -229,8 +199,8 @@ def getTotalIncome(accountId, from_year=1900, from_month=1, from_day=1, to_year=
         'accountId': accountId,
     	'categoryId': ','.join([str(x) for x in INCOME_CATEGORY_ID]),
     	'groupBy':'CATEGORY',
-    	"fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
-        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day),
+    	"fromDate": "%s-%s-%s" % (from_year, from_month, from_day),
+        "toDate": "%s-%s-%s" % (to_year, to_month, to_day),
     	'categoryType': 'INCOME',
     	'interval': 'M',
     	'include': 'details'
@@ -276,8 +246,8 @@ def getTransactionsCount(account,from_year=1900, from_month=1, from_day=1, to_ye
     data = {
         "container": container_input,
         "accountId": account,
-        "fromDate": "%d-%02d-%02d" % (from_year, from_month, from_day),
-        "toDate": "%d-%02d-%02d" % (to_year, to_month, to_day)
+        "fromDate": "%s-%s-%s" % (from_year, from_month, from_day),
+        "toDate": "%s-%s-%s" % (to_year, to_month, to_day)
     }
 
     req = requests.get("https://developer.api.yodlee.com/ysl/transactions/count",headers= INFO['headers'],params = data)

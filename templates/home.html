@@ -24,7 +24,7 @@
       <div class="account">
         <span class="accountName">{{ account.accountName }}</span><br>
         <span class="accountBalance">Current Balance: {{ account.balance.amount }} {{ account.balance.currency }}</span><br>
-        <a href="/viewAccount/{{ account.id }}">View More</a>
+        <a href="/viewAccount/{{ account.id }}?from_year=1900&from_month=01&from_day=01&to_year=2020&to_month=01&to_day=01">View More</a>
       </div>
       {% endfor %}
     </div>
