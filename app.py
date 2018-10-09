@@ -55,7 +55,7 @@ def transactionDetails(accountId, id):
 @app.route("/viewAccount/<accountId>")
 def viewAccount(accountId):
     args = request.args
-    account = yodlee_attempt.getAccount(accountId)
+    account = yodlee_attempt.getAccountById(accountId)
     transactions = yodlee_attempt.getTransactions(accountId, args['from_year'], args['from_month'], args['from_day'], args['to_year'], args['to_month'], args['to_day'])
     if 'transaction' in transactions:
         transactions = transactions['transaction']
